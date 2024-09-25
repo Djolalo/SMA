@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Environment{
-    private int[][] world;
+    private Agent[][] world;
     private int width, height; 
     private List<Agent> agentList; 
 
@@ -13,10 +13,10 @@ public class Environment{
         this.width = width; 
         this.height = height; 
         this.agentList = new ArrayList<>();
-        this.world = new int[width][height];
+        this.world = new Agent[width][height];
         for(int i = 0; i <world.length; i ++){
             for(int j = 0; j<world[i].length; j++){
-                this.world[i][j] = 0 ;
+                this.world[i][j] = null;
             }
         }     
     }
@@ -29,10 +29,10 @@ public class Environment{
         String toS = "";
         for(int i = 0; i <world.length; i ++){
             for(int j = 0; j<world[i].length; j++){
-                if(this.world[i][j] == 0 ){
+                if(this.world[i][j] == null ){
                     toS += ".";
                 }
-                else if(this.world[i][j] == 1 ){
+                else {
                     toS += "A";
                 }
             }
@@ -42,12 +42,7 @@ public class Environment{
     }
 
     public Agent agentAt(int x , int y){
-        for(Agent tmp : agentList){
-            if(tmp.getX() == x && tmp.getY() == y){
-                return tmp;
-            }
-        }
-        return null;
+        return this.world[x][y];
     }
 
     public int[] getDims(){
@@ -57,7 +52,7 @@ public class Environment{
         return dims;  
     }
 
-    public int[][] getWorld(){
+    public Agent[][] getWorld(){
         return this.world;
     }
 
